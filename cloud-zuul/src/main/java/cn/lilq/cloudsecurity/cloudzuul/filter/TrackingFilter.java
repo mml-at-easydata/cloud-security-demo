@@ -1,14 +1,19 @@
 package cn.lilq.cloudsecurity.cloudzuul.filter;
 
-import cn.lilq.cloudsecurity.cloudzuul.util.FilterUtil;
+import cn.lilq.cloudsecurity.cloudzuul.config.ServiceConfig;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -25,6 +30,8 @@ public class TrackingFilter extends ZuulFilter {
 
     @Autowired
     FilterUtil filterUtil;
+    @Autowired
+    private ServiceConfig serviceConfig;
 
     /**
      * 指定类型 前置过滤器
@@ -53,17 +60,42 @@ public class TrackingFilter extends ZuulFilter {
         return SHOULD_FILTER;
     }
 
+    private String getOrganizationId(){
+
+        String result="";
+        if (filterUtil.getAuthToken()!=null){
+
+            String authToken = filterUtil.getAuthToken().replace("Bearer ","");
+//            logger.debug("--------------"+authToken+"----------");
+//            logger.debug("signing key"+"==="+serviceConfig.getJwtSigningKey()+"===");
+            try {
+                Claims claims = Jwts.parser()
+                        .setSigningKey(serviceConfig.getJwtSigningKey().getBytes(StandardCharsets.UTF_8))
+                        .parseClaimsJws(authToken).getBody();
+                result = (String) claims.get("test");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     @Override
     public Object run() throws ZuulException {
         if (isCorrelationIdPresent()){
             System.out.println("tmx-id:"+filterUtil.getCorrelationId());
-            logger.debug("发现关联id---前置过滤器: {}.",filterUtil.getCorrelationId());
+            logger.debug("tmx-correlation-id   pre-filter: {}.",filterUtil.getCorrelationId());
         }else {
             filterUtil.setCorrelationId(generateCorrelationId());
-            logger.debug("生成关联id---前置过滤器: {}.",filterUtil.getCorrelationId());
+            logger.debug("tmx-correlation-id   pre-filter: {}.",filterUtil.getCorrelationId());
         }
+        String test = filterUtil.getTest(filterUtil.getAuthToken());
+        logger.debug("JWT parser is"+test);
+        filterUtil.setTest(test);
+
         RequestContext context = RequestContext.getCurrentContext();
-        logger.debug("处理传入的请求-- 前置过滤器: {}.",context.getRequest().getRequestURL());
+        logger.debug("Processing incoming Request pre-filter: {}.",context.getRequest().getRequestURL());
         return null;
     }
 

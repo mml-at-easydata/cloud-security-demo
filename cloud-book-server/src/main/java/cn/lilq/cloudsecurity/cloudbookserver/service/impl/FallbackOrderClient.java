@@ -19,4 +19,10 @@ public class FallbackOrderClient implements OrderClient {
         System.out.println("错误回调");
         return new Response(500,"server error",null);
     }
+
+    @Override
+    public Response getTest(String test) {
+        System.out.println("错误回调");
+        return new Response(500,"server error",null);
+    }
 }

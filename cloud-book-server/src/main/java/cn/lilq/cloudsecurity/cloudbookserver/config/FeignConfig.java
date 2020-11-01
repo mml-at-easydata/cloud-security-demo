@@ -18,5 +18,10 @@ public class FeignConfig implements RequestInterceptor {
         HttpServletRequest request = attributes.getRequest();
         //添加token
         requestTemplate.header("Authorization", request.getHeader("Authorization"));
+        //关联id
+        requestTemplate.header("tmx-correlation-id",request.getHeader("tmx-correlation-id"));
+        //jwt test
+        requestTemplate.header("tmx-test-id",request.getHeader("tmx-test-id"));
+
     }
 }

@@ -52,4 +52,15 @@ public class ClientCon {
                  */
                 return orderClient.addOrder(order);
         }
+
+        /**
+         * JWT test
+         * @param test test
+         * @return response
+         */
+        @ResponseBody
+        @RequestMapping(value = "/book/shop/test",method = RequestMethod.GET)
+        public Response shopTest(@RequestHeader(value = "tmx-test-id") String test){
+                return orderClient.getTest(test);
+        }
 }

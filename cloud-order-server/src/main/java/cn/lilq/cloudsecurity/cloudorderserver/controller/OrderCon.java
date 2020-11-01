@@ -90,4 +90,16 @@ public class OrderCon {
     public Response fallback(){
         return new Response(500,"server error",null);
     }
+
+    /**
+     * 测试JWT token 能否顺利传递参数
+     * @param test  test
+     * @return response
+     */
+    @ResponseBody
+    @RequestMapping(value = "/order/test",method = RequestMethod.GET)
+    @HystrixCommand
+    public Response getTest(@RequestHeader(value = "tmx-test-id") String test){
+        return new Response(200,"successful",test);
+    }
 }

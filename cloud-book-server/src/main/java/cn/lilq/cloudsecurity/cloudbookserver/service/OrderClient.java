@@ -7,10 +7,7 @@ import cn.lilq.cloudsecurity.cloudbookserver.service.impl.FallbackOrderClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @auther: Li Liangquan
@@ -24,4 +21,8 @@ public interface OrderClient {
     @ResponseBody
     @RequestMapping(value = "/order",method = RequestMethod.POST)
     Response addOrder(@RequestBody Order order);
+
+    @ResponseBody
+    @RequestMapping(value = "/order/test",method = RequestMethod.GET)
+    Response getTest(@RequestHeader(value = "tmx-test-id") String test);
 }

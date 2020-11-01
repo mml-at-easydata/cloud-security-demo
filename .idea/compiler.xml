@@ -7,10 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-eureka-server" />
-        <module name="third-party-authorization" />
         <module name="cloud-book-server" />
         <module name="cloud-zuul" />
         <module name="cloud-api-common" />
+        <module name="cloud-authorization-server" />
+        <module name="third-party-authorization" />
         <module name="cloud-order-server" />
       </profile>
     </annotationProcessing>

@@ -1,6 +1,5 @@
 package cn.lilq.cloudsecurity.cloudzuul.filter;
 
-import cn.lilq.cloudsecurity.cloudzuul.util.FilterUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;

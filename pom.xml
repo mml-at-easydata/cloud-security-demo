@@ -15,6 +15,7 @@
         <module>cloud-zuul</module>
         <module>cloud-order-server</module>
         <module>cloud-api-common</module>
+        <module>cloud-authorization-server</module>
     </modules>
 
     <packaging>pom</packaging>
