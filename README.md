@@ -1,5 +1,4 @@
 # cloud-security-demo
-
 ### api
 ##### 认证
 + 第三方验证地址
@@ -117,3 +116,6 @@ Content-Type: application/json
 ```http request
 GET http://localhost:8080/api/v1/order/order/test
 ```
+
+### 示意图
+![show](https://github.com/quan930/cloud-security-demo/blob/main/show.png)
