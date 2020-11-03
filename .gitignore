@@ -1,4 +1,4 @@
 .idea/
 **/target
 *.iml
-cloud-authorization-server
+cloud-zuul

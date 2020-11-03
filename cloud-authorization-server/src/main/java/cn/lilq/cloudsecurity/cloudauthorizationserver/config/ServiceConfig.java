@@ -1,4 +1,4 @@
-package cn.lilq.cloudsecurity.cloudzuul.config;
+package cn.lilq.cloudsecurity.cloudauthorizationserver.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @auther: Li Liangquan
- * @date: 2020/11/1 23:26
- * 签名密钥
+ * @date: 2020/10/30 20:09
  */
 @Component
 @Configuration
