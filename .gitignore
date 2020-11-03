@@ -1,4 +1,4 @@
 .idea/
 **/target
 *.iml
-cloud-zuul
+cloud-zuul/src/resources/public
